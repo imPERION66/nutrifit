@@ -17,6 +17,24 @@ function saveUsers(users) {
   localStorage.setItem("nf_users", JSON.stringify(users));
 }
 
+function normalizeGoal(goal) {
+  const normalizedGoal = (goal || "").toString().trim().toLowerCase();
+
+  if (normalizedGoal === "aumentar" || normalizedGoal === "aumentar masa muscular" || normalizedGoal === "ganar" || normalizedGoal === "ganar masa" || normalizedGoal === "masa muscular") {
+    return "ganar";
+  }
+
+  if (normalizedGoal === "bajar" || normalizedGoal === "bajar de peso" || normalizedGoal === "perder peso") {
+    return "bajar";
+  }
+
+  if (normalizedGoal === "mantener" || normalizedGoal === "mantener peso" || normalizedGoal === "mantener mi peso") {
+    return "mantener";
+  }
+
+  return "";
+}
+
 document.getElementById("form-login").addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -58,7 +76,7 @@ document.getElementById("form-register").addEventListener("submit", (e) => {
   const email = document.getElementById("reg-email").value.trim();
   const peso = document.getElementById("reg-peso").value;
   const talla = document.getElementById("reg-talla").value;
-  const objetivo = document.getElementById("reg-objetivo").value;
+  const objetivo = normalizeGoal(document.getElementById("reg-objetivo").value);
   const pass = document.getElementById("reg-pass").value;
   const errBox = document.getElementById("error-reg");
   const errText = document.getElementById("error-reg-text");
@@ -77,6 +95,12 @@ document.getElementById("form-register").addEventListener("submit", (e) => {
 
   if (pass.length < 6) {
     errText.textContent = "La contrasena debe tener al menos 6 caracteres.";
+    errBox.classList.add("show");
+    return;
+  }
+
+  if (!objetivo) {
+    errText.textContent = "Selecciona uno de los 3 objetivos: bajar, mantener o aumentar masa muscular.";
     errBox.classList.add("show");
     return;
   }

@@ -1,5 +1,23 @@
 const customFoods = [];
 
+function nfNormalizeGoal(goal) {
+  const normalizedGoal = (goal || "").toString().trim().toLowerCase();
+
+  if (normalizedGoal === "aumentar" || normalizedGoal === "aumentar masa muscular" || normalizedGoal === "ganar" || normalizedGoal === "ganar masa" || normalizedGoal === "masa muscular") {
+    return "ganar";
+  }
+
+  if (normalizedGoal === "bajar" || normalizedGoal === "bajar de peso" || normalizedGoal === "perder peso") {
+    return "bajar";
+  }
+
+  if (normalizedGoal === "mantener" || normalizedGoal === "mantener peso" || normalizedGoal === "mantener mi peso") {
+    return "mantener";
+  }
+
+  return "mantener";
+}
+
 function nfGetUsers() {
   return JSON.parse(localStorage.getItem("nf_users") || "[]");
 }
@@ -17,7 +35,20 @@ function nfGetUserGoal() {
   if (!session) {
     return "mantener";
   }
-  return localStorage.getItem(nfUserGoalKey(session.email)) || session.objetivo || "mantener";
+
+  const savedGoal = localStorage.getItem(nfUserGoalKey(session.email));
+  const normalizedGoal = nfNormalizeGoal(savedGoal || session.objetivo);
+
+  if (savedGoal !== normalizedGoal) {
+    localStorage.setItem(nfUserGoalKey(session.email), normalizedGoal);
+  }
+
+  if (session.objetivo !== normalizedGoal) {
+    session.objetivo = normalizedGoal;
+    localStorage.setItem("nf_session", JSON.stringify(session));
+  }
+
+  return normalizedGoal;
 }
 
 function nfSaveUserGoal(goal) {
@@ -26,14 +57,16 @@ function nfSaveUserGoal(goal) {
     return;
   }
 
-  localStorage.setItem(nfUserGoalKey(session.email), goal);
-  session.objetivo = goal;
+  const normalizedGoal = nfNormalizeGoal(goal);
+
+  localStorage.setItem(nfUserGoalKey(session.email), normalizedGoal);
+  session.objetivo = normalizedGoal;
   localStorage.setItem("nf_session", JSON.stringify(session));
 
   const users = nfGetUsers();
   const userIndex = users.findIndex((user) => user.email === session.email);
   if (userIndex >= 0) {
-    users[userIndex].objetivo = goal;
+    users[userIndex].objetivo = normalizedGoal;
     nfSaveUsers(users);
   }
 }
@@ -42,9 +75,9 @@ function nfGoalLabel(goal) {
   const labels = {
     bajar: "Bajar peso",
     mantener: "Mantener peso",
-    ganar: "Ganar masa"
+    ganar: "Aumentar masa muscular"
   };
-  return labels[goal] || "Mantener peso";
+  return labels[nfNormalizeGoal(goal)] || "Mantener peso";
 }
 
 function nfInitProfilePage() {
@@ -139,7 +172,7 @@ function searchFood(query = "") {
   const allFoods = [...foodDatabase, ...customFoods];
 
   const filtered = allFoods
-    .filter((food) => food.goal === goal)
+    .filter((food) => nfNormalizeGoal(food.goal) === goal)
     .filter((food) => food.name.toLowerCase().includes(normalizedQuery));
 
   renderCatalog(filtered, goal, query);
