@@ -406,12 +406,15 @@ body {
   }
 
   .panel-right {
+    flex-direction: column;
     min-height: 100vh;
     padding: 28px 18px;
   }
 
   .mobile-logo {
     display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
   }
 }
 
