@@ -1,0 +1,80 @@
+window.foodDatabase = [
+  {
+    id: "huevo",
+    name: "Huevo entero",
+    kcal: 155,
+    proteina: 13,
+    carbohidratos: 1.1,
+    grasas: 11,
+    goal: "mantener",
+    category: "Proteína",
+    badgeClass: "proteina",
+    description: "Una opción versátil para desayunos y snacks con buen aporte de proteína y grasas saludables.",
+    image: "../assets/img/huevos.jpeg"
+  },
+  {
+    id: "pollo",
+    name: "Pechuga de pollo",
+    kcal: 165,
+    proteina: 31,
+    carbohidratos: 0,
+    grasas: 3.6,
+    goal: "bajar",
+    category: "Proteína",
+    badgeClass: "proteina",
+    description: "Fuente magra de proteína, muy usada en planes de control de peso y ganancia muscular.",
+    image: "../assets/img/pechugapollo.jpeg"
+  },
+  {
+    id: "arroz",
+    name: "Arroz cocido",
+    kcal: 130,
+    proteina: 2.7,
+    carbohidratos: 28,
+    grasas: 0.3,
+    goal: "ganar",
+    category: "Cereal",
+    badgeClass: "cereal",
+    description: "Carbohidrato base para energía sostenida, fácil de combinar con proteínas y verduras.",
+    image: "../assets/img/arrozcocido.jpeg"
+  },
+  {
+    id: "brocoli",
+    name: "Brocoli",
+    kcal: 34,
+    proteina: 2.8,
+    carbohidratos: 7,
+    grasas: 0.4,
+    goal: "mantener",
+    category: "Verdura",
+    badgeClass: "verdura",
+    description: "Verdura ligera con fibra y micronutrientes, muy útil para platos de alto volumen.",
+    image: "../assets/img/brocoli.jpeg"
+  },
+  {
+    id: "platano",
+    name: "Platano",
+    kcal: 89,
+    proteina: 1.1,
+    carbohidratos: 23,
+    grasas: 0.3,
+    goal: "ganar",
+    category: "Fruta",
+    badgeClass: "fruta",
+    description: "Fruta práctica para antes o después de entrenar gracias a su aporte rápido de energía.",
+    image: "../assets/img/platanos.jpeg"
+  },
+  {
+    id: "aguacate",
+    name: "Aguacate",
+    kcal: 160,
+    proteina: 2,
+    carbohidratos: 9,
+    grasas: 15,
+    goal: "bajar",
+    category: "Grasa saludable",
+    badgeClass: "grasa",
+    description: "Grasa saludable muy apreciada para mejorar saciedad y enriquecer comidas con textura cremosa.",
+    image: "../assets/img/aguacate.jpeg"
+  }
+];

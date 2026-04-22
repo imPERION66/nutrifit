@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/auth.js"></script>
+  <script defer src="../js/data.js"></script>
+  <script defer src="../js/app.js"></script>
   <style>
     .catalog-shell {
       display: grid;
@@ -274,6 +276,124 @@
       color: var(--green-main);
     }
 
+    .catalog-toolbar-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .catalog-search {
+      position: relative;
+      width: min(320px, 100%);
+    }
+
+    .catalog-search input {
+      width: 100%;
+      padding: 11px 44px 11px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-white);
+      color: var(--text-dark);
+    }
+
+    .catalog-search button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      color: var(--text-mid);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .catalog-goal-info {
+      margin-top: 12px;
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .catalog-empty {
+      padding: 18px 22px;
+      color: var(--text-mid);
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+
+    dialog.custom-food-dialog {
+      border: none;
+      border-radius: 24px;
+      width: min(560px, calc(100% - 32px));
+      padding: 0;
+      box-shadow: 0 20px 45px rgba(19, 56, 62, 0.18);
+    }
+
+    dialog.custom-food-dialog::backdrop {
+      background: rgba(0, 0, 0, 0.32);
+    }
+
+    .dialog-content {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      background: white;
+      border-radius: 24px;
+    }
+
+    .dialog-content h3 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--text-dark);
+    }
+
+    .dialog-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .dialog-field label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .dialog-field input,
+    .dialog-field select,
+    .dialog-field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      color: var(--text-dark);
+      font-size: 13px;
+      min-height: 42px;
+    }
+
+    .dialog-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .dialog-actions .btn-secondary {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dark);
+    }
+
     @media (max-width: 1100px) {
       .catalog-intro {
         grid-template-columns: 1fr;
@@ -317,7 +437,7 @@
     }
   </style>
   <script>
-    document.addEventListener("DOMContentLoaded", () => nfInitApp("catalogo"));
+    document.addEventListener("DOMContentLoaded", () => nfInitCatalogPage());
   </script>
 </head>
 <body>
@@ -335,6 +455,7 @@
         <a class="nav-item" data-page="seguimiento" href="seguimiento.html"><i class="fa-solid fa-chart-line"></i> Seguimiento semanal</a>
         <span class="nav-section-label">Explorar</span>
         <a class="nav-item" data-page="catalogo" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catalogo de alimentos</a>
+        <a class="nav-item" data-page="perfil" href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
         <a class="nav-item" data-page="contacto" href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
       </nav>
       <div class="sidebar__logout"><button class="btn-logout" onclick="nfLogout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</button></div>
@@ -387,119 +508,62 @@
               <div>
                 <h2>Galeria nutricional</h2>
                 <p>Una presentacion visual para comparar alimentos de forma mas rapida.</p>
+                <p class="catalog-goal-info" id="catalog-goal-info"></p>
               </div>
-              <a class="catalog-action" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+              <div class="catalog-toolbar-actions">
+                <div class="catalog-search">
+                  <input id="catalog-search" type="search" placeholder="Buscar alimento...">
+                  <button id="catalog-search-clear" type="button" aria-label="Limpiar busqueda">&times;</button>
+                </div>
+                <button class="catalog-action" id="btn-open-custom-dialog" type="button"><i class="fa-solid fa-plus"></i> Agregar alimento</button>
+                <a class="catalog-action" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+              </div>
             </div>
 
-            <div class="food-gallery">
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/huevos.jpeg" alt="Huevo entero"></div>
-                  <div class="food-card__identity">
-                    <h3>Huevo entero</h3>
-                    <p>Una opcion versatil para desayunos y snacks con buen aporte de proteina y grasas saludables.</p>
-                  </div>
-                  <span class="food-badge proteina">Proteina</span>
-                </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>155 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>13 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>1.1 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>11 g</strong></div>
-                </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-star"></i> Ideal para desayuno</span><span>Alta saciedad</span></div>
-              </article>
+            <div class="food-gallery" id="food-gallery"></div>
+            <div class="catalog-empty" id="catalog-empty"></div>
 
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/pechugapollo.jpeg" alt="Pechuga de pollo"></div>
-                  <div class="food-card__identity">
-                    <h3>Pechuga de pollo</h3>
-                    <p>Fuente magra de proteina, muy usada en planes de control de peso y ganancia muscular.</p>
-                  </div>
-                  <span class="food-badge proteina">Proteina</span>
+            <dialog class="custom-food-dialog" id="custom-food-dialog">
+              <form class="dialog-content" id="custom-food-form">
+                <h3>Agregar alimento personalizado</h3>
+                <div class="dialog-field">
+                  <label for="food-name">Nombre del alimento</label>
+                  <input id="food-name" name="food-name" type="text" required>
                 </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>165 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>31 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>0 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>3.6 g</strong></div>
+                <div class="dialog-field">
+                  <label for="food-kcal">Calorías</label>
+                  <input id="food-kcal" name="food-kcal" type="number" min="0" required>
                 </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-dumbbell"></i> Excelente para fuerza</span><span>Muy magro</span></div>
-              </article>
-
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/arrozcocido.jpeg" alt="Arroz cocido"></div>
-                  <div class="food-card__identity">
-                    <h3>Arroz cocido</h3>
-                    <p>Carbohidrato base para energia sostenida, facil de combinar con proteinas y verduras.</p>
-                  </div>
-                  <span class="food-badge cereal">Cereal</span>
+                <div class="dialog-field">
+                  <label for="food-goal">Objetivo</label>
+                  <select id="food-goal" name="food-goal" required>
+                    <option value="bajar">Bajar peso</option>
+                    <option value="mantener">Mantener peso</option>
+                    <option value="ganar">Ganar masa</option>
+                  </select>
                 </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>130 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>2.7 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>28 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>0.3 g</strong></div>
+                <div class="dialog-field">
+                  <label for="food-category">Categoría</label>
+                  <input id="food-category" name="food-category" type="text" placeholder="Ej. Proteína, Fruta, Verdura">
                 </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-fire"></i> Energia principal</span><span>Bajo en grasa</span></div>
-              </article>
-
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/brocoli.jpeg" alt="Brocoli"></div>
-                  <div class="food-card__identity">
-                    <h3>Brocoli</h3>
-                    <p>Verdura ligera con fibra y micronutrientes, muy util para platos de alto volumen y pocas calorias.</p>
-                  </div>
-                  <span class="food-badge verdura">Verdura</span>
+                <div class="dialog-field">
+                  <label for="food-image">URL de imagen (opcional)</label>
+                  <input id="food-image" name="food-image" type="text" placeholder="../assets/img/mi-alimento.jpeg">
                 </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>34 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>2.8 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>7 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>0.4 g</strong></div>
+                <div class="dialog-field">
+                  <label for="food-description">Descripción</label>
+                  <textarea id="food-description" name="food-description" placeholder="Descripción breve"></textarea>
                 </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-leaf"></i> Muy ligero</span><span>Alto volumen</span></div>
-              </article>
-
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/platanos.jpeg" alt="Platano"></div>
-                  <div class="food-card__identity">
-                    <h3>Platano</h3>
-                    <p>Fruta practica para antes o despues de entrenar gracias a su aporte rapido de energia.</p>
-                  </div>
-                  <span class="food-badge fruta">Fruta</span>
+                <div class="dialog-field" style="display:none;">
+                  <label for="badge-class">Badge class</label>
+                  <input id="badge-class" name="badge-class" type="text" value="cereal">
                 </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>89 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>1.1 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>23 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>0.3 g</strong></div>
+                <div class="dialog-actions">
+                  <button type="button" class="btn-secondary" onclick="document.getElementById('custom-food-dialog').close();">Cancelar</button>
+                  <button type="submit" class="btn-primary">Agregar alimento</button>
                 </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-bolt"></i> Energia rapida</span><span>Snack natural</span></div>
-              </article>
-
-              <article class="food-card">
-                <div class="food-card__top">
-                  <div class="food-card__image"><img src="../assets/img/aguacate.jpeg" alt="Aguacate"></div>
-                  <div class="food-card__identity">
-                    <h3>Aguacate</h3>
-                    <p>Grasa saludable muy apreciada para mejorar saciedad y enriquecer comidas con textura cremosa.</p>
-                  </div>
-                  <span class="food-badge grasa">Grasa saludable</span>
-                </div>
-                <div class="food-metrics">
-                  <div class="food-metric"><span>Calorias</span><strong>160 kcal</strong></div>
-                  <div class="food-metric"><span>Proteinas</span><strong>2 g</strong></div>
-                  <div class="food-metric"><span>Carbohidratos</span><strong>9 g</strong></div>
-                  <div class="food-metric"><span>Grasas</span><strong>15 g</strong></div>
-                </div>
-                <div class="food-card__footer"><span><i class="fa-solid fa-heart"></i> Grasas buenas</span><span>Alta saciedad</span></div>
-              </article>
-            </div>
+              </form>
+            </dialog>
           </section>
         </section>
       </div>

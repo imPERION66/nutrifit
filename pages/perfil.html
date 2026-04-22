@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil | NutriFit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/data.js"></script>
+  <script defer src="../js/app.js"></script>
+  <style>
+    .profile-shell { display: grid; gap: 22px; }
+    .profile-card { padding: 28px; border-radius: 18px; border: 1px solid var(--border); background: var(--bg-white); box-shadow: var(--shadow-sm); max-width: 760px; }
+    .profile-intro { display: grid; gap: 16px; margin-bottom: 18px; }
+    .profile-intro h2 { margin: 0; font-family: var(--font-display); font-size: 28px; color: var(--text-dark); }
+    .profile-intro p { margin: 0; color: var(--text-mid); line-height: 1.7; }
+    .profile-field { display: grid; gap: 10px; margin-bottom: 18px; }
+    .profile-field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-dark); }
+    .profile-field input,
+    .profile-field select { width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg-white); color: var(--text-dark); }
+    .profile-card small { display: block; color: var(--text-mid); margin-top: 6px; }
+    .profile-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .profile-actions .btn-primary { min-width: 220px; }
+    .profile-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+    .profile-stat { padding: 18px; border-radius: 18px; background: var(--green-light); color: var(--green-dark); }
+    .profile-stat strong { display: block; font-size: 24px; margin-bottom: 8px; }
+    .profile-message { color: var(--green-dark); font-weight: 700; }
+    @media (max-width: 800px) {
+      .profile-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__logo"><div class="sidebar__logo-icon"><i class="fa-solid fa-leaf"></i></div><span class="sidebar__logo-name">NutriFit</span></div>
+      <div class="sidebar__user"><div class="user-avatar" data-user-avatar>U</div><p class="user-name" data-user-name>Usuario</p><p class="user-email" data-user-email>correo@email.com</p></div>
+      <nav class="sidebar__nav">
+        <span class="nav-section-label">Principal</span>
+        <a class="nav-item" data-page="dashboard" href="dashboard.html"><i class="fa-solid fa-house"></i> Inicio</a>
+        <span class="nav-section-label">Mis herramientas</span>
+        <a class="nav-item" data-page="nutrientes" href="nutrientes.html"><i class="fa-solid fa-chart-pie"></i> Contador de nutrientes</a>
+        <a class="nav-item" data-page="calculadora" href="calculadora.html"><i class="fa-solid fa-weight-scale"></i> Calculadora IMC</a>
+        <a class="nav-item" data-page="recomendador" href="recomendador.html"><i class="fa-solid fa-seedling"></i> Recomendador de dieta</a>
+        <a class="nav-item" data-page="seguimiento" href="seguimiento.html"><i class="fa-solid fa-chart-line"></i> Seguimiento semanal</a>
+        <span class="nav-section-label">Explorar</span>
+        <a class="nav-item" data-page="catalogo" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catalogo de alimentos</a>
+        <a class="nav-item" data-page="perfil" href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+        <a class="nav-item" data-page="contacto" href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
+      </nav>
+      <div class="sidebar__logout"><button class="btn-logout" onclick="nfLogout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</button></div>
+    </aside>
+    <div class="overlay" id="overlay" onclick="nfCloseSidebar()"></div>
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-logo"><div class="sidebar__logo-icon" style="width:30px;height:30px;font-size:13px;"><i class="fa-solid fa-leaf"></i></div><span>NutriFit</span></div>
+        <button class="btn-menu" id="btn-menu" onclick="nfToggleSidebar()" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+      <div class="content">
+        <header class="page-header">
+          <h1>Mi perfil</h1>
+          <p>Gestiona tu información personal y cambia tu objetivo para que el catálogo muestre alimentos según tu meta.</p>
+        </header>
+        <section class="profile-shell">
+          <article class="profile-card">
+            <div class="profile-intro">
+              <h2>Información del usuario</h2>
+              <p>Los datos se muestran desde tu sesión local y el objetivo se guarda en el navegador para usarlo en el catálogo.</p>
+            </div>
+            <div class="profile-field">
+              <label>Nombre</label>
+              <input type="text" id="profile-name" disabled>
+            </div>
+            <div class="profile-field">
+              <label>Correo</label>
+              <input type="email" id="profile-email" disabled>
+            </div>
+            <div class="profile-field">
+              <label for="profile-goal">Objetivo</label>
+              <select id="profile-goal">
+                <option value="bajar">Bajar peso</option>
+                <option value="mantener">Mantener peso</option>
+                <option value="ganar">Ganar masa</option>
+              </select>
+              <small>Cambia tu objetivo para que el catálogo filtre los alimentos más adecuados.</small>
+            </div>
+            <div class="profile-actions">
+              <button class="btn-primary" id="profile-save" type="button">Guardar objetivo</button>
+              <span class="profile-message" id="profile-message"></span>
+            </div>
+            <div class="profile-stats">
+              <div class="profile-stat"><strong>Meta personal</strong><span>Se usará para filtrar el catálogo.</span></div>
+              <div class="profile-stat"><strong>Local</strong><span>El objetivo se guarda en el navegador sin APIs externas.</span></div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => nfInitProfilePage());
+  </script>
+</body>
+</html>
