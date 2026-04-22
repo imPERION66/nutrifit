@@ -40,6 +40,7 @@ body {
   font-family: var(--font-body);
   background: var(--bg-page);
   color: var(--text-dark);
+  overflow-x: hidden;
 }
 
 a {
@@ -119,6 +120,7 @@ a {
   margin-top: 2px;
   color: rgba(255, 255, 255, 0.45);
   font-size: 12px;
+  overflow-wrap: anywhere;
 }
 
 .sidebar__nav {
@@ -160,6 +162,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .nav-item__indicator {
@@ -279,6 +282,7 @@ a {
 
 .content {
   padding: 36px 36px 60px;
+  width: 100%;
   transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
@@ -342,6 +346,15 @@ body.is-transitioning .content {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 22px;
+}
+
+.panel-grid-2 > *,
+.stats-grid-3 > *,
+.info-grid-3 > *,
+.plans-grid-3 > *,
+.week-grid > *,
+.form-grid-2 > * {
+  min-width: 0;
 }
 
 .stats-grid-3,
@@ -492,6 +505,10 @@ body.is-transitioning .content {
   margin-bottom: 8px;
 }
 
+.day-card span {
+  display: block;
+}
+
 .day-dot {
   width: 12px;
   height: 12px;
@@ -508,6 +525,8 @@ body.is-transitioning .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
   padding: 20px 24px;
   border-bottom: 1px solid var(--border);
 }
@@ -521,10 +540,12 @@ body.is-transitioning .content {
 
 .table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   font-size: 13px;
 }
@@ -609,8 +630,30 @@ tbody tr:last-child td {
     padding: 24px 16px 48px;
   }
 
+  .hero-card,
+  .panel-card {
+    padding: 18px;
+  }
+
+  .table-card__header {
+    padding: 16px 18px;
+  }
+
   .form-grid-2 {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .page-header p,
+  .panel-card p,
+  .hero-card p,
+  .table-card p {
+    font-size: 14px;
+  }
+
+  .table-card__header a {
+    width: 100%;
   }
 }
 

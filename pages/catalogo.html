@@ -8,6 +8,309 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/auth.js"></script>
+  <style>
+    .catalog-shell {
+      display: grid;
+      gap: 22px;
+    }
+
+    .catalog-intro {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .catalog-highlight,
+    .catalog-summary {
+      min-width: 0;
+    }
+
+    .catalog-highlight {
+      padding: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(45, 158, 107, 0.16), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #f5fbf8 100%);
+    }
+
+    .catalog-highlight h2 {
+      margin-bottom: 12px;
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--text-dark);
+    }
+
+    .catalog-highlight p {
+      max-width: 58ch;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .catalog-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .catalog-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: #f0f8f4;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .catalog-chip i {
+      color: var(--green-main);
+    }
+
+    .catalog-summary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .catalog-stat {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .catalog-stat span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-light);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .catalog-stat strong {
+      display: block;
+      color: var(--text-dark);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .catalog-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 18px 22px;
+    }
+
+    .catalog-toolbar h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 24px;
+    }
+
+    .catalog-toolbar p {
+      color: var(--text-mid);
+      font-size: 14px;
+    }
+
+    .catalog-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 12px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .food-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding: 0 22px 22px;
+    }
+
+    .food-card {
+      display: grid;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fcfa 100%);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .food-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-soft);
+    }
+
+    .food-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .food-card__identity {
+      min-width: 0;
+    }
+
+    .food-card__emoji {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: var(--green-light);
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .food-card__identity h3 {
+      margin-bottom: 6px;
+      font-size: 18px;
+      color: var(--text-dark);
+    }
+
+    .food-card__identity p {
+      color: var(--text-mid);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .food-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .food-badge.proteina {
+      background: #fdeaea;
+      color: #b03030;
+    }
+
+    .food-badge.cereal {
+      background: #fff7dc;
+      color: #8d7200;
+    }
+
+    .food-badge.verdura {
+      background: #e7f7ee;
+      color: #1f7d52;
+    }
+
+    .food-badge.fruta {
+      background: #fff1e6;
+      color: #b35a16;
+    }
+
+    .food-badge.grasa {
+      background: #f2ebfc;
+      color: #6f45b0;
+    }
+
+    .food-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .food-metric {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(232, 247, 240, 0.72);
+    }
+
+    .food-metric span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-light);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .food-metric strong {
+      color: var(--text-dark);
+      font-size: 16px;
+    }
+
+    .food-card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-top: 2px;
+      color: var(--text-mid);
+      font-size: 13px;
+    }
+
+    .food-card__footer i {
+      color: var(--green-main);
+    }
+
+    @media (max-width: 1100px) {
+      .catalog-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .food-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .catalog-highlight,
+      .catalog-toolbar,
+      .food-gallery {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .catalog-highlight {
+        padding-top: 22px;
+        padding-bottom: 22px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .catalog-summary,
+      .food-gallery,
+      .food-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-toolbar h2 {
+        font-size: 22px;
+      }
+
+      .food-card__top,
+      .food-card__footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
   <script>
     document.addEventListener("DOMContentLoaded", () => nfInitApp("catalogo"));
   </script>
@@ -40,23 +343,159 @@
       <div class="content">
         <header class="page-header">
           <h1>Catalogo de alimentos</h1>
-          <p>Explora alimentos frecuentes con una tabla profesional integrada al mismo entorno visual del dashboard.</p>
+          <p>Explora una seleccion visual de alimentos frecuentes dentro de una presentacion tipo galeria, mas clara y atractiva para consultar rapidamente.</p>
         </header>
-        <section class="table-card">
-          <div class="table-card__header"><h2>Base nutricional</h2><a href="dashboard.html">Volver al inicio</a></div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Alimento</th><th>Categoria</th><th>Calorias</th><th>Proteinas</th><th>Carbohidratos</th><th>Grasas</th></tr></thead>
-              <tbody>
-                <tr><td>Huevo entero</td><td>Proteina</td><td>155 kcal</td><td>13 g</td><td>1.1 g</td><td>11 g</td></tr>
-                <tr><td>Pechuga de pollo</td><td>Proteina</td><td>165 kcal</td><td>31 g</td><td>0 g</td><td>3.6 g</td></tr>
-                <tr><td>Arroz cocido</td><td>Cereal</td><td>130 kcal</td><td>2.7 g</td><td>28 g</td><td>0.3 g</td></tr>
-                <tr><td>Brocoli</td><td>Verdura</td><td>34 kcal</td><td>2.8 g</td><td>7 g</td><td>0.4 g</td></tr>
-                <tr><td>Platano</td><td>Fruta</td><td>89 kcal</td><td>1.1 g</td><td>23 g</td><td>0.3 g</td></tr>
-                <tr><td>Aguacate</td><td>Grasa saludable</td><td>160 kcal</td><td>2 g</td><td>9 g</td><td>15 g</td></tr>
-              </tbody>
-            </table>
+        <section class="catalog-shell">
+          <div class="catalog-intro">
+            <article class="hero-card catalog-highlight">
+              <h2>Tu vitrina nutricional</h2>
+              <p>Consulta rapidamente calorias, proteinas, carbohidratos y grasas en una galeria limpia y moderna. Esta vista esta pensada para presentacion, navegacion rapida y lectura comoda desde cualquier dispositivo.</p>
+              <div class="catalog-chip-row">
+                <span class="catalog-chip"><i class="fa-solid fa-bolt"></i> Calorias por porcion</span>
+                <span class="catalog-chip"><i class="fa-solid fa-dumbbell"></i> Proteina destacada</span>
+                <span class="catalog-chip"><i class="fa-solid fa-seedling"></i> Seleccion saludable</span>
+              </div>
+            </article>
+
+            <div class="catalog-summary">
+              <article class="catalog-stat">
+                <span>Alimentos destacados</span>
+                <strong>6</strong>
+              </article>
+              <article class="catalog-stat">
+                <span>Categorias</span>
+                <strong>5</strong>
+              </article>
+              <article class="catalog-stat">
+                <span>Mas proteico</span>
+                <strong>Pollo</strong>
+              </article>
+              <article class="catalog-stat">
+                <span>Mas ligero</span>
+                <strong>Brocoli</strong>
+              </article>
+            </div>
           </div>
+
+          <section class="table-card">
+            <div class="catalog-toolbar">
+              <div>
+                <h2>Galeria nutricional</h2>
+                <p>Una presentacion visual para comparar alimentos de forma mas rapida.</p>
+              </div>
+              <a class="catalog-action" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+            </div>
+
+            <div class="food-gallery">
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🥚</div>
+                    <h3>Huevo entero</h3>
+                    <p>Una opcion versatil para desayunos y snacks con buen aporte de proteina y grasas saludables.</p>
+                  </div>
+                  <span class="food-badge proteina">Proteina</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>155 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>13 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>1.1 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>11 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-star"></i> Ideal para desayuno</span><span>Alta saciedad</span></div>
+              </article>
+
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🍗</div>
+                    <h3>Pechuga de pollo</h3>
+                    <p>Fuente magra de proteina, muy usada en planes de control de peso y ganancia muscular.</p>
+                  </div>
+                  <span class="food-badge proteina">Proteina</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>165 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>31 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>0 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>3.6 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-dumbbell"></i> Excelente para fuerza</span><span>Muy magro</span></div>
+              </article>
+
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🍚</div>
+                    <h3>Arroz cocido</h3>
+                    <p>Carbohidrato base para energia sostenida, facil de combinar con proteinas y verduras.</p>
+                  </div>
+                  <span class="food-badge cereal">Cereal</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>130 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>2.7 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>28 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>0.3 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-fire"></i> Energia principal</span><span>Bajo en grasa</span></div>
+              </article>
+
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🥦</div>
+                    <h3>Brocoli</h3>
+                    <p>Verdura ligera con fibra y micronutrientes, muy util para platos de alto volumen y pocas calorias.</p>
+                  </div>
+                  <span class="food-badge verdura">Verdura</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>34 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>2.8 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>7 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>0.4 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-leaf"></i> Muy ligero</span><span>Alto volumen</span></div>
+              </article>
+
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🍌</div>
+                    <h3>Platano</h3>
+                    <p>Fruta practica para antes o despues de entrenar gracias a su aporte rapido de energia.</p>
+                  </div>
+                  <span class="food-badge fruta">Fruta</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>89 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>1.1 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>23 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>0.3 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-bolt"></i> Energia rapida</span><span>Snack natural</span></div>
+              </article>
+
+              <article class="food-card">
+                <div class="food-card__top">
+                  <div class="food-card__identity">
+                    <div class="food-card__emoji">🥑</div>
+                    <h3>Aguacate</h3>
+                    <p>Grasa saludable muy apreciada para mejorar saciedad y enriquecer comidas con textura cremosa.</p>
+                  </div>
+                  <span class="food-badge grasa">Grasa saludable</span>
+                </div>
+                <div class="food-metrics">
+                  <div class="food-metric"><span>Calorias</span><strong>160 kcal</strong></div>
+                  <div class="food-metric"><span>Proteinas</span><strong>2 g</strong></div>
+                  <div class="food-metric"><span>Carbohidratos</span><strong>9 g</strong></div>
+                  <div class="food-metric"><span>Grasas</span><strong>15 g</strong></div>
+                </div>
+                <div class="food-card__footer"><span><i class="fa-solid fa-heart"></i> Grasas buenas</span><span>Alta saciedad</span></div>
+              </article>
+            </div>
+          </section>
         </section>
       </div>
     </main>

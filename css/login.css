@@ -41,6 +41,7 @@ body {
     radial-gradient(circle at top left, rgba(45, 158, 107, 0.06), transparent 26%),
     linear-gradient(180deg, #fbfdfb 0%, var(--bg-page) 100%);
   color: var(--text-dark);
+  overflow-x: hidden;
 }
 
 .split {
@@ -169,11 +170,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px 56px;
+  min-width: 0;
 }
 
 .form-box {
   width: 100%;
   max-width: 420px;
+  min-width: 0;
 }
 
 .mobile-logo {
@@ -188,6 +191,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--bg-page);
+  gap: 4px;
 }
 
 .tab-btn {
@@ -241,6 +245,7 @@ body {
   background: #fff5f5;
   color: var(--error);
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 
 .msg-error.show {
@@ -315,6 +320,7 @@ body {
   align-items: center;
   gap: 8px;
   color: var(--text-mid);
+  flex-wrap: wrap;
 }
 
 .link-small,
@@ -410,6 +416,14 @@ body {
 }
 
 @media (max-width: 640px) {
+  .form-box {
+    max-width: 100%;
+  }
+
+  .tabs {
+    margin-bottom: 28px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -417,5 +431,29 @@ body {
   .form-check {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-right {
+    padding: 20px 14px;
+  }
+
+  .form-title {
+    font-size: 24px;
+  }
+
+  .form-subtitle,
+  .form-switch {
+    font-size: 13px;
+  }
+
+  .tab-btn {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .btn-submit {
+    padding: 13px 16px;
   }
 }
