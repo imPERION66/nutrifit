@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/auth.js"></script>
   <script defer src="../js/calculadora.js"></script>
-  <script defer>nfInitApp("calculadora");</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => nfInitApp("calculadora"));
+  </script>
 </head>
 <body>
   <div class="app">

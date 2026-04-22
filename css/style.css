@@ -139,7 +139,6 @@ a {
 .nav-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   padding: 11px 24px;
   border-left: 3px solid transparent;
@@ -164,13 +163,7 @@ a {
 }
 
 .nav-item__indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: transparent;
-  box-shadow: 0 0 0 0 rgba(184, 232, 208, 0.35);
-  transform: scale(0.75);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  display: none;
 }
 
 .nav-item:hover {
@@ -183,21 +176,6 @@ a {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-weight: 500;
-}
-
-.nav-item.active .nav-item__indicator {
-  background: var(--green-soft);
-  box-shadow: 0 0 0 6px rgba(184, 232, 208, 0.16);
-  transform: scale(1);
-}
-
-.nav-item.is-pending {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.nav-item.is-pending .nav-item__indicator {
-  background: rgba(255, 255, 255, 0.72);
-  transform: scale(1);
 }
 
 .sidebar__logout {

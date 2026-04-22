@@ -378,7 +378,7 @@
       <a class="nav-item" data-page="seguimiento" href="seguimiento.html"><i class="fa-solid fa-chart-line"></i> Seguimiento semanal</a>
 
       <span class="nav-section-label">Explorar</span>
-      <a class="nav-item" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catálogo de alimentos</a>
+      <a class="nav-item" data-page="catalogo" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catálogo de alimentos</a>
       <a class="nav-item" data-page="contacto" href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
     </nav>
     <div class="sidebar__logout">
@@ -566,15 +566,6 @@
       window.location.href = '../login.html';
     }
   }
-  document.querySelectorAll('.nav-item').forEach((item) => {
-    item.addEventListener('click', () => {
-      document.querySelectorAll('.nav-item').forEach((link) => {
-        link.classList.remove('is-pending');
-      });
-      item.classList.add('is-pending');
-      document.body.classList.add('is-transitioning');
-    });
-  });
 </script>
 
 </body>

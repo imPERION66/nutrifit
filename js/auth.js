@@ -88,23 +88,9 @@ function nfEnhanceSidebar(activePage) {
 
       item.innerHTML = "";
       item.appendChild(content);
-
-      const indicator = document.createElement("span");
-      indicator.className = "nav-item__indicator";
-      indicator.setAttribute("aria-hidden", "true");
-      item.appendChild(indicator);
     }
 
     item.classList.toggle("active", item.dataset.page === activePage);
-
-    item.addEventListener("click", () => {
-      document.querySelectorAll(".nav-item").forEach((link) => {
-        link.classList.remove("is-pending");
-      });
-      item.classList.add("is-pending");
-      document.body.classList.add("is-transitioning");
-      sessionStorage.setItem("nf_last_page", item.dataset.page || "");
-    });
   });
 }
 
