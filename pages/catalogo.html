@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo de alimentos | NutriFit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/auth.js"></script>
+  <script defer>nfInitApp("catalogo");</script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__logo"><div class="sidebar__logo-icon"><i class="fa-solid fa-leaf"></i></div><span class="sidebar__logo-name">NutriFit</span></div>
+      <div class="sidebar__user"><div class="user-avatar" data-user-avatar>U</div><p class="user-name" data-user-name>Usuario</p><p class="user-email" data-user-email>correo@email.com</p></div>
+      <nav class="sidebar__nav">
+        <span class="nav-section-label">Principal</span>
+        <a class="nav-item" data-page="dashboard" href="dashboard.html"><i class="fa-solid fa-house"></i> Inicio</a>
+        <span class="nav-section-label">Mis herramientas</span>
+        <a class="nav-item" data-page="nutrientes" href="nutrientes.html"><i class="fa-solid fa-chart-pie"></i> Contador de nutrientes</a>
+        <a class="nav-item" data-page="calculadora" href="calculadora.html"><i class="fa-solid fa-weight-scale"></i> Calculadora IMC</a>
+        <a class="nav-item" data-page="recomendador" href="recomendador.html"><i class="fa-solid fa-seedling"></i> Recomendador de dieta</a>
+        <a class="nav-item" data-page="seguimiento" href="seguimiento.html"><i class="fa-solid fa-chart-line"></i> Seguimiento semanal</a>
+        <span class="nav-section-label">Explorar</span>
+        <a class="nav-item" data-page="catalogo" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catalogo de alimentos</a>
+        <a class="nav-item" data-page="contacto" href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
+      </nav>
+      <div class="sidebar__logout"><button class="btn-logout" onclick="nfLogout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</button></div>
+    </aside>
+    <div class="overlay" id="overlay" onclick="nfCloseSidebar()"></div>
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-logo"><div class="sidebar__logo-icon" style="width:30px;height:30px;font-size:13px;"><i class="fa-solid fa-leaf"></i></div><span>NutriFit</span></div>
+        <button class="btn-menu" id="btn-menu" onclick="nfToggleSidebar()" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+      <div class="content">
+        <header class="page-header">
+          <h1>Catalogo de alimentos</h1>
+          <p>Explora alimentos frecuentes con una tabla profesional integrada al mismo entorno visual del dashboard.</p>
+        </header>
+        <section class="table-card">
+          <div class="table-card__header"><h2>Base nutricional</h2><a href="dashboard.html">Volver al inicio</a></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Alimento</th><th>Categoria</th><th>Calorias</th><th>Proteinas</th><th>Carbohidratos</th><th>Grasas</th></tr></thead>
+              <tbody>
+                <tr><td>Huevo entero</td><td>Proteina</td><td>155 kcal</td><td>13 g</td><td>1.1 g</td><td>11 g</td></tr>
+                <tr><td>Pechuga de pollo</td><td>Proteina</td><td>165 kcal</td><td>31 g</td><td>0 g</td><td>3.6 g</td></tr>
+                <tr><td>Arroz cocido</td><td>Cereal</td><td>130 kcal</td><td>2.7 g</td><td>28 g</td><td>0.3 g</td></tr>
+                <tr><td>Brocoli</td><td>Verdura</td><td>34 kcal</td><td>2.8 g</td><td>7 g</td><td>0.4 g</td></tr>
+                <tr><td>Platano</td><td>Fruta</td><td>89 kcal</td><td>1.1 g</td><td>23 g</td><td>0.3 g</td></tr>
+                <tr><td>Aguacate</td><td>Grasa saludable</td><td>160 kcal</td><td>2 g</td><td>9 g</td><td>15 g</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

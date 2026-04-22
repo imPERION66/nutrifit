@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de nutrientes | NutriFit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/auth.js"></script>
+  <script defer>nfInitApp("nutrientes");</script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__logo">
+        <div class="sidebar__logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <span class="sidebar__logo-name">NutriFit</span>
+      </div>
+      <div class="sidebar__user">
+        <div class="user-avatar" data-user-avatar>U</div>
+        <p class="user-name" data-user-name>Usuario</p>
+        <p class="user-email" data-user-email>correo@email.com</p>
+      </div>
+      <nav class="sidebar__nav">
+        <span class="nav-section-label">Principal</span>
+        <a class="nav-item" data-page="dashboard" href="dashboard.html"><i class="fa-solid fa-house"></i> Inicio</a>
+        <span class="nav-section-label">Mis herramientas</span>
+        <a class="nav-item" data-page="nutrientes" href="nutrientes.html"><i class="fa-solid fa-chart-pie"></i> Contador de nutrientes</a>
+        <a class="nav-item" data-page="calculadora" href="calculadora.html"><i class="fa-solid fa-weight-scale"></i> Calculadora IMC</a>
+        <a class="nav-item" data-page="recomendador" href="recomendador.html"><i class="fa-solid fa-seedling"></i> Recomendador de dieta</a>
+        <a class="nav-item" data-page="seguimiento" href="seguimiento.html"><i class="fa-solid fa-chart-line"></i> Seguimiento semanal</a>
+        <span class="nav-section-label">Explorar</span>
+        <a class="nav-item" data-page="catalogo" href="catalogo.html"><i class="fa-solid fa-book-open"></i> Catalogo de alimentos</a>
+        <a class="nav-item" data-page="contacto" href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a>
+      </nav>
+      <div class="sidebar__logout">
+        <button class="btn-logout" onclick="nfLogout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesion</button>
+      </div>
+    </aside>
+    <div class="overlay" id="overlay" onclick="nfCloseSidebar()"></div>
+    <main class="main">
+      <div class="topbar">
+        <div class="topbar-logo">
+          <div class="sidebar__logo-icon" style="width:30px;height:30px;font-size:13px;"><i class="fa-solid fa-leaf"></i></div>
+          <span>NutriFit</span>
+        </div>
+        <button class="btn-menu" id="btn-menu" onclick="nfToggleSidebar()" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+      <div class="content">
+        <header class="page-header">
+          <h1>Contador de nutrientes</h1>
+          <p>Visualiza tus macronutrientes del dia y compara tu avance con tu objetivo nutricional.</p>
+        </header>
+        <section class="hero-card">
+          <p>Hola, <strong data-user-first-name>Usuario</strong>. Aqui tienes un resumen rapido para que controles mejor tu alimentacion diaria con el mismo look profesional del dashboard.</p>
+        </section>
+        <section class="stats-grid-3">
+          <article class="summary-card green">
+            <h3>Proteinas</h3>
+            <strong>98 g</strong>
+            <span>Meta diaria: 150 g</span>
+            <div class="progress-bar green"><span style="width: 65%;"></span></div>
+          </article>
+          <article class="summary-card blue">
+            <h3>Carbohidratos</h3>
+            <strong>144 g</strong>
+            <span>Meta diaria: 300 g</span>
+            <div class="progress-bar blue"><span style="width: 48%;"></span></div>
+          </article>
+          <article class="summary-card orange">
+            <h3>Grasas</h3>
+            <strong>43 g</strong>
+            <span>Meta diaria: 60 g</span>
+            <div class="progress-bar orange"><span style="width: 72%;"></span></div>
+          </article>
+        </section>
+        <section class="panel-card" style="margin-top: 22px;">
+          <h2>Consejo del dia</h2>
+          <p>Distribuye la proteina en varias comidas y combina carbohidratos complejos con verduras para sostener energia y saciedad.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
