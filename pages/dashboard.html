@@ -307,6 +307,10 @@
     td { padding: 13px 20px; border-bottom: 1px solid var(--border); color: var(--text-mid); }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: var(--bg-page); }
+    .food-row { display: inline-flex; align-items: center; gap: 10px; }
+    .food-row__image { width: 36px; height: 36px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: var(--green-light); }
+    .food-row__image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .food-row__label { color: var(--text-dark); font-weight: 600; font-size: 13px; white-space: nowrap; }
     .food-badge { display:inline-block; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:500; }
     .fb-p { background:#fce8e8; color:#b03030; }
     .fb-v { background:var(--green-light); color:var(--green-dark); }
@@ -502,11 +506,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>🥚 Huevo entero</td><td><span class="food-badge fb-p">Proteína</span></td><td>155 kcal</td><td>13g</td><td>1.1g</td></tr>
-            <tr><td>🍗 Pechuga de pollo</td><td><span class="food-badge fb-p">Proteína</span></td><td>165 kcal</td><td>31g</td><td>0g</td></tr>
-            <tr><td>🥦 Brócoli</td><td><span class="food-badge fb-v">Verdura</span></td><td>34 kcal</td><td>2.8g</td><td>7g</td></tr>
-            <tr><td>🍌 Plátano</td><td><span class="food-badge fb-f">Fruta</span></td><td>89 kcal</td><td>1.1g</td><td>23g</td></tr>
-            <tr><td>🥑 Aguacate</td><td><span class="food-badge fb-g">Grasa sana</span></td><td>160 kcal</td><td>2g</td><td>9g</td></tr>
+            <tr><td><div class="food-row"><span class="food-row__image"><img src="../assets/img/huevos.jpeg" alt="Huevo entero"></span><span class="food-row__label">Huevo entero</span></div></td><td><span class="food-badge fb-p">Proteína</span></td><td>155 kcal</td><td>13g</td><td>1.1g</td></tr>
+            <tr><td><div class="food-row"><span class="food-row__image"><img src="../assets/img/pechugapollo.jpeg" alt="Pechuga de pollo"></span><span class="food-row__label">Pechuga de pollo</span></div></td><td><span class="food-badge fb-p">Proteína</span></td><td>165 kcal</td><td>31g</td><td>0g</td></tr>
+            <tr><td><div class="food-row"><span class="food-row__image"><img src="../assets/img/brocoli.jpeg" alt="Brócoli"></span><span class="food-row__label">Brócoli</span></div></td><td><span class="food-badge fb-v">Verdura</span></td><td>34 kcal</td><td>2.8g</td><td>7g</td></tr>
+            <tr><td><div class="food-row"><span class="food-row__image"><img src="../assets/img/platanos.jpeg" alt="Plátano"></span><span class="food-row__label">Plátano</span></div></td><td><span class="food-badge fb-f">Fruta</span></td><td>89 kcal</td><td>1.1g</td><td>23g</td></tr>
+            <tr><td><div class="food-row"><span class="food-row__image"><img src="../assets/img/aguacate.jpeg" alt="Aguacate"></span><span class="food-row__label">Aguacate</span></div></td><td><span class="food-badge fb-g">Grasa sana</span></td><td>160 kcal</td><td>2g</td><td>9g</td></tr>
           </tbody>
         </table>
         </div>

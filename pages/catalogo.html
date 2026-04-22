@@ -167,16 +167,21 @@
       min-width: 0;
     }
 
-    .food-card__emoji {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      background: var(--green-light);
-      font-size: 24px;
+    .food-card__image {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      overflow: hidden;
       flex-shrink: 0;
+      background: var(--green-light);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.22);
+    }
+
+    .food-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .food-card__identity h3 {
@@ -389,8 +394,8 @@
             <div class="food-gallery">
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/huevos.jpeg" alt="Huevo entero"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🥚</div>
                     <h3>Huevo entero</h3>
                     <p>Una opcion versatil para desayunos y snacks con buen aporte de proteina y grasas saludables.</p>
                   </div>
@@ -407,8 +412,8 @@
 
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/pechugapollo.jpeg" alt="Pechuga de pollo"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🍗</div>
                     <h3>Pechuga de pollo</h3>
                     <p>Fuente magra de proteina, muy usada en planes de control de peso y ganancia muscular.</p>
                   </div>
@@ -425,8 +430,8 @@
 
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/arrozcocido.jpeg" alt="Arroz cocido"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🍚</div>
                     <h3>Arroz cocido</h3>
                     <p>Carbohidrato base para energia sostenida, facil de combinar con proteinas y verduras.</p>
                   </div>
@@ -443,8 +448,8 @@
 
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/brocoli.jpeg" alt="Brocoli"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🥦</div>
                     <h3>Brocoli</h3>
                     <p>Verdura ligera con fibra y micronutrientes, muy util para platos de alto volumen y pocas calorias.</p>
                   </div>
@@ -461,8 +466,8 @@
 
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/platanos.jpeg" alt="Platano"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🍌</div>
                     <h3>Platano</h3>
                     <p>Fruta practica para antes o despues de entrenar gracias a su aporte rapido de energia.</p>
                   </div>
@@ -479,8 +484,8 @@
 
               <article class="food-card">
                 <div class="food-card__top">
+                  <div class="food-card__image"><img src="../assets/img/aguacate.jpeg" alt="Aguacate"></div>
                   <div class="food-card__identity">
-                    <div class="food-card__emoji">🥑</div>
                     <h3>Aguacate</h3>
                     <p>Grasa saludable muy apreciada para mejorar saciedad y enriquecer comidas con textura cremosa.</p>
                   </div>
